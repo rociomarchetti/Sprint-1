@@ -107,21 +107,29 @@ testPromise()
 Crea una funció que retorni el doble del número que li passa com a paràmetre després de 2 segons.
 Crea una altra funció que rebi tres números i calculi la suma dels seus dobles fent servir la funció anterior. */
 
-function double(value) {
-    const result = Number(value * 2)
-    return setTimeout(() => {
-        result
+//sin promise
+/* function double(value) {
+        return setTimeout(() => {
+        const result = Number(value * 2)
         console.log(result)
     }, 2000)
+} */
+
+function double(value) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(value * 2)
+        }, 2000)
+    })
 }
 
-function addition(num1, num2, num3) {
-    const firstNumber = double(num1)
-    const secondNumber = double(num2)
-    const thirdNumber = double(num3)
+async function addition(num1, num2, num3) {
+    const firstNumber = await double(num1)
+    const secondNumber = await double(num2)
+    const thirdNumber = await double(num3)
     const additionResult = firstNumber + secondNumber + thirdNumber
-    console.log(additionResult)
+    return additionResult
 }
 
-addition(3, 7, 9)
-
+addition(1, 1, 1)
+    .then(result => console.log(result)) 
