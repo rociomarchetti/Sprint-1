@@ -24,11 +24,11 @@ printUserData('Lola', 'Gómez')
 Invoca una funció que retorni un valor des de dins d'una template literal.  */
 
 function newUserData(name, surname) {
-    const message = `Nombre nuevo usuario: ${name}. Apellido nuevo usuario: ${surname}`
+    const message = `Nombre: ${name}. Apellido: ${surname}`
     return message
 }
 
-const newMessage = newUserData('Agustina', 'Fernández')
+const newMessage = `Nuevo usuario : ${newUserData('Agustina', 'Fernández')}`
 console.log(newMessage)
 
 /* - Exercici 1
@@ -38,18 +38,27 @@ Haurà de mostrar-se per consola el compte del 0 al 9 deu vegades. */
 
 const functionsList = []
 
+function printNumbers() {
+    for (let i = 0; i < 10; i++) {
+        console.log(i)
+    }
+}
+
 for (let i = 0; i < 10; i++) {
-
-i => console.log(i)
-functionsList.push(i)
-
+    functionsList.push(printNumbers)
 }
 
 console.log(functionsList)
+
+for (element in functionsList) {
+    printNumbers()
+}
 
 /* - Exercici 2
 Crea una funció anònima autoinvocable igualada a una variable que mostri per consola el nom de 
 l'usuari/ària a rebut com a paràmetre. */
 
-const userName = itsName => console.log(itsName)
-userName('María')
+const userName = (function (name) {
+    const printedName = console.log(name)
+    return printedName
+})('María')
