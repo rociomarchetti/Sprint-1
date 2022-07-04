@@ -34,19 +34,19 @@ const getEmployee = valueID => {
             const choosedEmployee = employees.find(employee => employee.id === valueID)
             const employeeData = `El nombre de ese empleado es: ${choosedEmployee.name}`
             resolve(employeeData)
-        } else {
+        } /* else {
             const error = 'No hemos encontrado a ese empleado'
             reject(error)
-        }
+        } */
     })
 
     employeeInfo
         .then(ok => {
             console.log(ok)
         })
-        .catch(err => {
-            console.error(err)
-        })
+    /* .catch(err => {
+        console.error(err)
+    }) */
 
     return employeeInfo
 }
@@ -58,19 +58,19 @@ const getSalary = employeeObject => {
             const thatEmployee = employees.indexOf(employeeObject)
             const thatEmployeeSalary = `El salario de ese empleado es ${salaries[thatEmployee].salary}`
             resolve(thatEmployeeSalary)
-        } else {
+        } /* else {
             const errorMessage = 'No hemos encontrado a ese empleado'
             reject(errorMessage)
-        }
+        } */
     })
 
     employeeSalary
         .then(ok => {
             console.log(ok)
         })
-        .catch(err => {
-            console.error(err)
-        })
+    /*  .catch(err => {
+         console.error(err)
+     }) */
 
     return employeeSalary
 }
@@ -81,7 +81,7 @@ async function getEmployeeData(valueID) {
     const employeeIncome = await getSalary(employees[valueID])
 }
 
-let valueID = 1
+let valueID = 2
 getEmployeeData(valueID)
 
 /* - Exercici 2
@@ -107,14 +107,6 @@ testPromise()
 Crea una funció que retorni el doble del número que li passa com a paràmetre després de 2 segons.
 Crea una altra funció que rebi tres números i calculi la suma dels seus dobles fent servir la funció anterior. */
 
-//sin promise
-/* function double(value) {
-        return setTimeout(() => {
-        const result = Number(value * 2)
-        console.log(result)
-    }, 2000)
-} */
-
 function double(value) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -131,5 +123,22 @@ async function addition(num1, num2, num3) {
     return additionResult
 }
 
-addition(1, 1, 1)
-    .then(result => console.log(result)) 
+addition(3, 7, 9)
+    .then(result => console.log(result))
+
+/* - Exercici 1
+Força i captura tants errors com puguis dels nivells 1 i 2. */
+
+const catchErrors = (function (valueID) {
+
+    if (valueID > 3) { getEmployee(valueID).catch(error => console.log('Ese número de id es muy alto')) }
+
+})(4)
+
+/* getEmployee(null).catch(error => console.log('No ha ingresado ningún id')) */
+
+/*     if (employees.find(employee => employee.id != valueID)) { throw new Error }
+        else if (valueID === null || valueID === NaN || valueID === '') { throw new Error} 
+        else if (employees.includes(employeeObject) === false) { throw new Error} 
+        else if (employeeObject === null || employeeObject === '') {throw new Error}  */
+
