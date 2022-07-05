@@ -50,13 +50,21 @@ for (let i = 0; i < 10; i++) {
 
 console.log(functionsList)
 
-functionsList.forEach(element => element()) 
+/* for (element in functionsList) {
+    printNumbers()
+} */ //---> esto no está ejecutando las funciones dentro del array
+
+functionsList.forEach(element => element())
 
 /* - Exercici 2
 Crea una funció anònima autoinvocable igualada a una variable que mostri per consola el nom de 
 l'usuari/ària a rebut com a paràmetre. */
 
-const userName = (function (name) {
+/* const userName = (function (name) {
     const printedName = console.log(name)
     return printedName
+})('María') */ //--> no es necesaria la variable ni el return
+
+const userName = (function (name) {
+    console.log(name)
 })('María')
