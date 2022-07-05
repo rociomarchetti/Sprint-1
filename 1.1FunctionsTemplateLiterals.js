@@ -50,9 +50,7 @@ for (let i = 0; i < 10; i++) {
 
 console.log(functionsList)
 
-for (element in functionsList) {
-    printNumbers()
-}
+functionsList.forEach(element => element()) 
 
 /* - Exercici 2
 Crea una funció anònima autoinvocable igualada a una variable que mostri per consola el nom de 
