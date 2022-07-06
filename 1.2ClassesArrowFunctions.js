@@ -6,7 +6,11 @@ Mostra per la consola el resultat d'una arrow function autoinvocable que sumi do
 /* const arrowFunction = (num1, num2) => num1 + num2
 console.log(arrowFunction(3, 7)) */
 
-((num1, num2) => console.log(num1 + num2))(3, 7)
+/* ((num1, num2) => console.log(num1 + num2))(3, 7) */ //--> hay que mostrar por consola el resultado de la función
+
+//--> Corrección:
+const arrowFunction = ((num1, num2) => num1 + num2)(3, 7)
+console.log(arrowFunction)
 
 //NIVEL 2
 
@@ -78,26 +82,31 @@ class Thing {
         }
     }
 
-    sayThings() {
-        throw new Error('Las cosas no hablan!')
-    }
-
     doThings() {
-        console.log('Its my thing!')
+        throw new Error('Esto no puede estar pasando')
     }
 
 }
 
-class Moco extends Thing {
+/* class Moco extends Thing {
     sayThings() {
         console.log('Hello Moco')
     }
 }
 
-
-
 new Moco().doThings()
 new Moco().sayThings()
+*/
 
-new Thing()
-new Thing().sayThings()
+function createThing(thingToCreate) {
+
+    let newThing = Object.create(Thing.prototype)
+    newThing.name = thingToCreate
+    return newThing
+}
+
+Thing.prototype.sayThings = function (thingCreated) { console.log(`Soy un ${thingCreated}`)}
+
+let moco = createThing('Moco')
+let mocoTalk = Thing.prototype.sayThings(moco.name) 
+console.log(moco instanceof Thing)
