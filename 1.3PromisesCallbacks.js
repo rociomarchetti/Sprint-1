@@ -1,8 +1,11 @@
+//NIVEL 1
+
 /* - Exercici 1
 Crea una funció que retorni una Promise que invoqui la funció resolve() o reject() que rep. 
 Invoca-la passant-li les dues funcions de manera que imprimeixin un missatge diferent depenent de si la Promise es resol o no. */
 
-const hasWon = true
+/* const hasWon = true
+
 
 const game = new Promise((resolve, reject) => {
     if (hasWon) {
@@ -25,13 +28,32 @@ const checkWinner = () => {
         })
 }
 
-checkWinner()
+checkWinner() */
+
+const hasWon = false
+
+const resolveFunction = () => { console.log('Has ganado!') }
+const rejectFunction = () => { console.log('Aún no lo consigues, deberás continuar intentándolo!') }
+
+function play(callback1, callback2, boolean) {
+
+    return new Promise((resolve, reject) => {
+
+        if (boolean === true) {
+            resolve(callback1)
+        } else {
+            reject(callback2)
+        }
+    })
+}
+
+play(resolveFunction, rejectFunction, hasWon).then(resolveFunction, rejectFunction)
 
 /* - Exercici 2
 Crea una arrow function que rebi un paràmetre i una funció callback i li 
 passi a la funció un missatge o un altre (que s'imprimirà per consola) en funció del paràmetre rebut. */
 
-function printResult(result) {
+/* function printResult(result) {
     console.log(result)
 }
 
@@ -47,7 +69,25 @@ const messageResult = (a, printResult) => {
 }
 
 const a = true
+messageResult(a, printResult) */
+
+function printResult(result) {
+    console.log(result)
+}
+
+const messageResult = (a, printResult) => {
+
+    if (!a) {
+        printResult('NO')
+    } else {
+        printResult('SÍ')
+    }
+}
+
+const a = false
 messageResult(a, printResult)
+
+//NIVEL 2
 
 /* - Exercici 1
 Donats els objectes employees i salaries, crea una arrow function getEmployee() que retorni una Promise 
@@ -142,7 +182,7 @@ getEmployee(valueID)
         console.log(error)
     })
 
-   /*  - Exercici 1
-    Fixa un element catch a la invocació del nivell anterior que capturi 
-    qualsevol error i el mostri per la consola.
- */
+/*  - Exercici 1
+ Fixa un element catch a la invocació del nivell anterior que capturi 
+ qualsevol error i el mostri per la consola.
+*/
