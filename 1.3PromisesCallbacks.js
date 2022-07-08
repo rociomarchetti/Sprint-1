@@ -114,7 +114,6 @@ const getEmployee = (valueID) => {
             reject(error)
         }
     })
-
 }
 
 getEmployee(1)
