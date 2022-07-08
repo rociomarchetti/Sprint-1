@@ -49,48 +49,10 @@ function play(callback1, callback2, boolean) {
 
 play(resolveFunction, rejectFunction, hasWon).then(resolveFunction, rejectFunction)
 
-/* - Exercici 2
-Crea una arrow function que rebi un paràmetre i una funció callback i li 
-passi a la funció un missatge o un altre (que s'imprimirà per consola) en funció del paràmetre rebut. */
-
-/* function printResult(result) {
-    console.log(result)
-}
-
-const messageResult = (a, printResult) => {
-
-    if (!a) {
-        const result = 'NO'
-        printResult(result)
-    } else {
-        const result = 'SÍ'
-        printResult(result)
-    }
-}
-
-const a = true
-messageResult(a, printResult) */
-
-function printResult(result) {
-    console.log(result)
-}
-
-const messageResult = (a, printResult) => {
-
-    if (!a) {
-        printResult('NO')
-    } else {
-        printResult('SÍ')
-    }
-}
-
-const a = false
-messageResult(a, printResult)
-
 //NIVEL 2
 
 /* - Exercici 1
-Donats els objectes employees i salaries, crea una arrow function getEmployee() que retorni una Promise 
+Donats els objectes employees i salaries, crea una arrow function getEmployee() que retorni una Promise
 efectuant la cerca en l'objecte pel seu id. */
 
 let employees = [{
@@ -115,8 +77,8 @@ let salaries = [{
     salary: 2000
 }];
 
-const getEmployee = valueID => {
-
+/* const getEmployee = valueID => {
+ 
     const employeeInfo = new Promise((resolve, reject) => {
         if (employees.find(employee => employee.id === valueID)) {
             const choosedEmployee = employees.find(employee => employee.id === valueID)
@@ -127,7 +89,7 @@ const getEmployee = valueID => {
             reject(error)
         }
     })
-
+ 
     employeeInfo
         .then(ok => {
             console.log(ok)
@@ -135,18 +97,36 @@ const getEmployee = valueID => {
         .catch(err => {
             console.error(err)
         })
-
+ 
     return employeeInfo
 }
+ 
+getEmployee(2) */
 
-getEmployee(2)
+const getEmployee = (valueID) => {
+
+    return new Promise((resolve, reject) => {
+
+        if (employees.find(employee => employee.id === valueID)) {
+            const choosedEmployee = employees.find(employee => employee.id === valueID)
+            resolve(choosedEmployee)
+        } else {
+            reject(error)
+        }
+    })
+
+}
+
+getEmployee(1)
+    .then(choosedEmployee => (console.log(`El nombre de ese empleado es: ${choosedEmployee.name}`)))
+    .catch(error => (console.log('No hemos encontrado a ese empleado')))
 
 /* - Exercici 2
-Crea una altra arrow function getSalary() similar a l'anterior 
+Crea una altra arrow function getSalary() similar a l'anterior
 que rebi com a paràmetre un objecte employee i retorni el seu salari. */
 
-const getSalary = employeeObject => {
-
+/* const getSalary = employeeObject => {
+ 
     const employeeSalary = new Promise((resolve, reject) => {
         if (employees.includes(employeeObject)) {
             const thatEmployee = employees.indexOf(employeeObject)
@@ -157,7 +137,7 @@ const getSalary = employeeObject => {
             reject(errorMessage)
         }
     })
-
+ 
     employeeSalary
         .then(ok => {
             console.log(ok)
@@ -165,24 +145,45 @@ const getSalary = employeeObject => {
         .catch(err => {
             console.error(err)
         })
-
+ 
     return employeeSalary
 }
+ 
+getSalary(employees[2]) */
 
-getSalary(employees[2])
+const getSalary = (valueID) => {
+
+    return new Promise((resolve, reject) => {
+        if (salaries.find(salary => salary.id === valueID)) {
+            const thatEmployee = salaries.find(salary => salary.id === valueID)
+            resolve(thatEmployee)
+        } else {
+            reject(error)
+        }
+    })
+}
+
+getSalary(2)
+    .then(thatEmployee => (console.log(`El salario de ese empleado es: ${thatEmployee.salary}`)))
+    .catch(error => (console.log(`No hemos encontrado el salario de ese empleado`)))
+
 
 /* - Exercici 3
-Invoca la primera funció getEmployee() i després getSalary() niant l'execució de les dues promises 
+Invoca la primera funció getEmployee() i després getSalary() niant l'execució de les dues promises
 de manera que es retorni per la consola el nom de l'empleat/da i el seu salari. */
 
-let valueID = 1
+let valueID = 3
 getEmployee(valueID)
-    .then(getSalary(employees[valueID]))
-    .catch((error) => {
-        console.log(error)
-    })
+.then ((choosedEmployee) => {
+    console.log(`Nombre: ${choosedEmployee.name}`)
+    return getSalary(valueID)
+})
+.then((thatEmployee) => {
+    (console.log(`Salario: ${thatEmployee.salary}`))
+})
+.catch((error) => console.log('Algo ha fallado'))
 
 /*  - Exercici 1
- Fixa un element catch a la invocació del nivell anterior que capturi 
+ Fixa un element catch a la invocació del nivell anterior que capturi
  qualsevol error i el mostri per la consola.
 */
