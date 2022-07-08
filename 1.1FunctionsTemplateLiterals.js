@@ -72,4 +72,4 @@ l'usuari/ària a rebut com a paràmetre. */
 //--> Corrección:
 const userName = (function (name) {
     console.log(name)
-})('María')
+})('María') 
